@@ -1,13 +1,9 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 
+#include "Tank.h"
 #include "TankAIController.h"
 
-ATank* ATankAIController::GetControlledTank() const
-{
-    return Cast<ATank> (GetPawn()); //return the pawn that AIContrller is currently possessing (type cased into ATank)
-    
-}
 
 void ATankAIController::BeginPlay()
 {
@@ -35,6 +31,34 @@ void ATankAIController::BeginPlay()
     }
 
 }
+
+// Called every frame
+void ATankAIController::Tick(float DeltaTime)
+{
+	Super::Tick(DeltaTime);
+
+    // Move towards player
+
+    
+    // tell controlled tank to aim at player.
+    // don't forget to protect pointer by checking if there is a valid player tank
+    if (GetPlayerTank())
+    {
+        GetControlledTank()->AimAt(GetPlayerTank()->GetActorLocation());
+    }
+
+
+    // Fire if ready
+
+}
+
+
+ATank* ATankAIController::GetControlledTank() const
+{
+    return Cast<ATank> (GetPawn()); //return the pawn that AIContrller is currently possessing (type cased into ATank)
+    
+}
+
 
 ATank* ATankAIController::GetPlayerTank() const
 {
