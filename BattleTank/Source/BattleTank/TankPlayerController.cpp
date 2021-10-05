@@ -103,6 +103,7 @@ bool ATankPlayerController::GetSightRayHitLocation(FVector& HitLocation) const
     // return false; // ray doesn't hit anything
 }
 
+// Line trace along that look direction and see what we hit up to max range
 bool ATankPlayerController::GetLookVectorHitLocation(FVector LookDirection, FVector& HitLocation) const
 {
     FHitResult HitResult;
