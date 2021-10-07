@@ -9,6 +9,7 @@
 class UTankBarrel;  // Forward declaration
 class UTankAimingComponent;  // Forward declaration which allows us to include header file in .cpp file instead of here in .h file
 class UTankTurret;  // Forward declaration
+class AProjectile;  // Forward declaration
 
 UCLASS()
 class BATTLETANK_API ATank : public APawn
@@ -26,6 +27,12 @@ private:
 	UPROPERTY(EditAnywhere, Category = Firing)
 	float LaunchSpeed = 4000;  // sensible starting value of 40 m/s (if value is too large, projectile can reach everywhere removing the need to move tank)
 
+	UPROPERTY(EditAnywhere, Category = Setup)
+	TSubclassOf<AProjectile> ProjectileBlueprint;
+	// UClass* ProjectileBlueprint;    // alternative to TSubclassOf <>
+
+	UTankBarrel* Barrel = nullptr;  // Local Barrel reference for spawning projectile
+
 
 protected:
 	UTankAimingComponent* TankAimingComponent = nullptr;
@@ -34,8 +41,7 @@ protected:
 	virtual void BeginPlay() override;
 
 public:
-	// Aim at (either the object through crossair or player)
-	void AimAt(FVector HitLocation);
+	
 
 	// Pass Tank's component barrel reference to set subobject's member variable with it
 	// We also want to expose this func to blueprint editor so that the child (Tank_BP) can use it to set up static mesh object's reference
@@ -45,6 +51,12 @@ public:
 
 	UFUNCTION(BlueprintCallable, Category = Setup)
 	void SetTurretReference(UTankTurret* TurretToSet);
+
+	// Aim at (either the object through crossair or player)
+	void AimAt(FVector HitLocation);
+
+	UFUNCTION(BlueprintCallable, Category = Firing)
+	void Fire();
 
 
 };
