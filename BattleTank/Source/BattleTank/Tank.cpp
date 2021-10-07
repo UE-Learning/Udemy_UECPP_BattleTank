@@ -60,9 +60,6 @@ void ATank::SetTurretReference(UTankTurret* TurretToSet)
 
 void ATank::Fire()
 {
-	float Time = GetWorld()->GetTimeSeconds();       // to make sure this method is ticking (called from Tick function)
-	UE_LOG(LogTemp, Warning, TEXT("At time %f, Tank has fired"), Time);
-
 	if (!Barrel)
 	{
 		return;
@@ -70,10 +67,13 @@ void ATank::Fire()
 
 	// Spawn a projectile at sotcket location on the barrel
 
-	GetWorld()->SpawnActor<AProjectile>(
+	AProjectile* Projectile = GetWorld()->SpawnActor<AProjectile>(
 			ProjectileBlueprint,
 			Barrel->GetSocketLocation(FName("Projectile")),  // Projectile is the socket name on barrel
 			Barrel->GetSocketRotation(FName("Projectile"))
 	);
+
+	// launch the projectile with given speed
+	Projectile->LaunchProjectile(LaunchSpeed);
 }
 
