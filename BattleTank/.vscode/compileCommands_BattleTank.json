@@ -25,6 +25,16 @@
 		"directory": "C:\\Epic Games\\UE_4.26\\Engine\\Source"
 	},
 	{
+		"file": "D:\\\\Unreal Engine\\\\Learning\\\\UE learning\\\\Games\\\\Udemy_UECPP_BattleTank\\\\BattleTank\\\\Source\\\\BattleTank\\\\Projectile.cpp",
+		"command": "cl.exe @\"D:\\Unreal Engine\\Learning\\UE learning\\Games\\Udemy_UECPP_BattleTank\\BattleTank\\.vscode\\compileCommands_BattleTank\\BattleTank.182.rsp\"",
+		"directory": "C:\\Epic Games\\UE_4.26\\Engine\\Source"
+	},
+	{
+		"file": "D:\\\\Unreal Engine\\\\Learning\\\\UE learning\\\\Games\\\\Udemy_UECPP_BattleTank\\\\BattleTank\\\\Source\\\\BattleTank\\\\Projectile.h",
+		"command": "cl.exe @\"D:\\Unreal Engine\\Learning\\UE learning\\Games\\Udemy_UECPP_BattleTank\\BattleTank\\.vscode\\compileCommands_BattleTank\\BattleTank.182.rsp\"",
+		"directory": "C:\\Epic Games\\UE_4.26\\Engine\\Source"
+	},
+	{
 		"file": "D:\\\\Unreal Engine\\\\Learning\\\\UE learning\\\\Games\\\\Udemy_UECPP_BattleTank\\\\BattleTank\\\\Source\\\\BattleTank\\\\Tank.cpp",
 		"command": "cl.exe @\"D:\\Unreal Engine\\Learning\\UE learning\\Games\\Udemy_UECPP_BattleTank\\BattleTank\\.vscode\\compileCommands_BattleTank\\BattleTank.182.rsp\"",
 		"directory": "C:\\Epic Games\\UE_4.26\\Engine\\Source"
@@ -71,6 +81,16 @@
 	},
 	{
 		"file": "D:\\\\Unreal Engine\\\\Learning\\\\UE learning\\\\Games\\\\Udemy_UECPP_BattleTank\\\\BattleTank\\\\Source\\\\BattleTank\\\\TankPlayerController.h",
+		"command": "cl.exe @\"D:\\Unreal Engine\\Learning\\UE learning\\Games\\Udemy_UECPP_BattleTank\\BattleTank\\.vscode\\compileCommands_BattleTank\\BattleTank.182.rsp\"",
+		"directory": "C:\\Epic Games\\UE_4.26\\Engine\\Source"
+	},
+	{
+		"file": "D:\\\\Unreal Engine\\\\Learning\\\\UE learning\\\\Games\\\\Udemy_UECPP_BattleTank\\\\BattleTank\\\\Source\\\\BattleTank\\\\TankTurret.cpp",
+		"command": "cl.exe @\"D:\\Unreal Engine\\Learning\\UE learning\\Games\\Udemy_UECPP_BattleTank\\BattleTank\\.vscode\\compileCommands_BattleTank\\BattleTank.182.rsp\"",
+		"directory": "C:\\Epic Games\\UE_4.26\\Engine\\Source"
+	},
+	{
+		"file": "D:\\\\Unreal Engine\\\\Learning\\\\UE learning\\\\Games\\\\Udemy_UECPP_BattleTank\\\\BattleTank\\\\Source\\\\BattleTank\\\\TankTurret.h",
 		"command": "cl.exe @\"D:\\Unreal Engine\\Learning\\UE learning\\Games\\Udemy_UECPP_BattleTank\\BattleTank\\.vscode\\compileCommands_BattleTank\\BattleTank.182.rsp\"",
 		"directory": "C:\\Epic Games\\UE_4.26\\Engine\\Source"
 	}

@@ -10,6 +10,7 @@ void ATankAIController::BeginPlay()
     Super::BeginPlay(); // construct base's constructor's stuff first
 
     //Debug lines
+    /*
     auto ControlledTank = GetControlledTank();  //auto keyword is saying that ControlledTank variable is the type being initialized which is ATank*
     if (!ControlledTank)
     {
@@ -19,16 +20,18 @@ void ATankAIController::BeginPlay()
     {
         UE_LOG(LogTemp, Warning, TEXT("AI Controller is possessing %s"), *(ControlledTank->GetName()));
     }
-
+    
     ATank* PlayerTank = GetPlayerTank();
     if (!PlayerTank)
     {
         UE_LOG(LogTemp, Warning, TEXT("AI controller cannot find Player tank!"));
     }
+    /*
     else
     {
         UE_LOG(LogTemp, Warning, TEXT("AI controller found player tank : %s"), *(PlayerTank->GetName()));
     }
+    */
 
 }
 
@@ -42,17 +45,22 @@ void ATankAIController::Tick(float DeltaTime)
     
     // tell controlled tank to aim at player.
     // don't forget to protect pointer by checking if there is a valid player tank
-    if (GetPlayerTank())
+    ATank* PlayerTank = nullptr;
+    PlayerTank = Cast<ATank> (GetWorld()->GetFirstPlayerController()->GetPawn());
+    auto ControlledTank = Cast<ATank> (GetPawn());
+    //Note: we won't try to cast it before checking null pointer because the cast will fail if PlayerPawn is nullptr
+    if (PlayerTank)
     {
-        GetControlledTank()->AimAt(GetPlayerTank()->GetActorLocation());
+        ControlledTank->AimAt(PlayerTank->GetActorLocation());
     }
 
-
-    // Fire if ready
+    // Fire if ready (checking the reloading time is done in Tank's Fire function. Otherwise, AI tank will fire every frame)
+    ControlledTank->Fire();
 
 }
 
 
+/*
 ATank* ATankAIController::GetControlledTank() const
 {
     return Cast<ATank> (GetPawn()); //return the pawn that AIContrller is currently possessing (type cased into ATank)
@@ -71,3 +79,4 @@ ATank* ATankAIController::GetPlayerTank() const
 
     return Cast<ATank> (PlayerPawn);
 }
+*/

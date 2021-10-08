@@ -33,6 +33,11 @@ private:
 
 	UTankBarrel* Barrel = nullptr;  // Local Barrel reference for spawning projectile
 
+	UPROPERTY(EditAnywhere, Category = Firing)
+	float ReloadTimeInSeconds = 3;  // 3 sec reload time, can't fire more than once in 3 seconds
+
+	double LastFireTime = 0;  // initialized as 0 sec, reassign with current time after firing
+
 
 protected:
 	UTankAimingComponent* TankAimingComponent = nullptr;

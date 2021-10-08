@@ -22,8 +22,10 @@ class BATTLETANK_API ATankAIController : public AAIController
 		// Called every frame
 		virtual void Tick(float DeltaTime) override;
 
+		
+		/*
 		ATank* GetPlayerTank() const;  //to get the pawn (ATank) possessed by ATankPlayerController
-
 		ATank* GetControlledTank() const;
+		*/
 	
 };
