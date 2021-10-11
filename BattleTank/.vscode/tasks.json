@@ -542,6 +542,276 @@
 			}
 		},
 		{
+			"label": "BattleTank IOS Debug Build",
+			"group": "build",
+			"command": "Engine\\Build\\BatchFiles\\Build.bat",
+			"args": [
+				"BattleTank",
+				"IOS",
+				"Debug",
+				"D:\\Unreal Engine\\Learning\\UE learning\\Games\\Udemy_UECPP_BattleTank\\BattleTank\\BattleTank.uproject",
+				"-waitmutex"
+			],
+			"problemMatcher": "$msCompile",
+			"type": "shell",
+			"options": {
+				"cwd": "C:\\Epic Games\\UE_4.26"
+			}
+		},
+		{
+			"label": "BattleTank IOS Debug Rebuild",
+			"group": "build",
+			"command": "Engine\\Build\\BatchFiles\\Build.bat",
+			"args": [
+				"BattleTank",
+				"IOS",
+				"Debug",
+				"D:\\Unreal Engine\\Learning\\UE learning\\Games\\Udemy_UECPP_BattleTank\\BattleTank\\BattleTank.uproject",
+				"-waitmutex"
+			],
+			"problemMatcher": "$msCompile",
+			"dependsOn": [
+				"BattleTank IOS Debug Clean"
+			],
+			"type": "shell",
+			"options": {
+				"cwd": "C:\\Epic Games\\UE_4.26"
+			}
+		},
+		{
+			"label": "BattleTank IOS Debug Clean",
+			"group": "build",
+			"command": "Engine\\Build\\BatchFiles\\Clean.bat",
+			"args": [
+				"BattleTank",
+				"IOS",
+				"Debug",
+				"D:\\Unreal Engine\\Learning\\UE learning\\Games\\Udemy_UECPP_BattleTank\\BattleTank\\BattleTank.uproject",
+				"-waitmutex"
+			],
+			"problemMatcher": "$msCompile",
+			"type": "shell",
+			"options": {
+				"cwd": "C:\\Epic Games\\UE_4.26"
+			}
+		},
+		{
+			"label": "BattleTank IOS DebugGame Build",
+			"group": "build",
+			"command": "Engine\\Build\\BatchFiles\\Build.bat",
+			"args": [
+				"BattleTank",
+				"IOS",
+				"DebugGame",
+				"D:\\Unreal Engine\\Learning\\UE learning\\Games\\Udemy_UECPP_BattleTank\\BattleTank\\BattleTank.uproject",
+				"-waitmutex"
+			],
+			"problemMatcher": "$msCompile",
+			"type": "shell",
+			"options": {
+				"cwd": "C:\\Epic Games\\UE_4.26"
+			}
+		},
+		{
+			"label": "BattleTank IOS DebugGame Rebuild",
+			"group": "build",
+			"command": "Engine\\Build\\BatchFiles\\Build.bat",
+			"args": [
+				"BattleTank",
+				"IOS",
+				"DebugGame",
+				"D:\\Unreal Engine\\Learning\\UE learning\\Games\\Udemy_UECPP_BattleTank\\BattleTank\\BattleTank.uproject",
+				"-waitmutex"
+			],
+			"problemMatcher": "$msCompile",
+			"dependsOn": [
+				"BattleTank IOS DebugGame Clean"
+			],
+			"type": "shell",
+			"options": {
+				"cwd": "C:\\Epic Games\\UE_4.26"
+			}
+		},
+		{
+			"label": "BattleTank IOS DebugGame Clean",
+			"group": "build",
+			"command": "Engine\\Build\\BatchFiles\\Clean.bat",
+			"args": [
+				"BattleTank",
+				"IOS",
+				"DebugGame",
+				"D:\\Unreal Engine\\Learning\\UE learning\\Games\\Udemy_UECPP_BattleTank\\BattleTank\\BattleTank.uproject",
+				"-waitmutex"
+			],
+			"problemMatcher": "$msCompile",
+			"type": "shell",
+			"options": {
+				"cwd": "C:\\Epic Games\\UE_4.26"
+			}
+		},
+		{
+			"label": "BattleTank IOS Development Build",
+			"group": "build",
+			"command": "Engine\\Build\\BatchFiles\\Build.bat",
+			"args": [
+				"BattleTank",
+				"IOS",
+				"Development",
+				"D:\\Unreal Engine\\Learning\\UE learning\\Games\\Udemy_UECPP_BattleTank\\BattleTank\\BattleTank.uproject",
+				"-waitmutex"
+			],
+			"problemMatcher": "$msCompile",
+			"type": "shell",
+			"options": {
+				"cwd": "C:\\Epic Games\\UE_4.26"
+			}
+		},
+		{
+			"label": "BattleTank IOS Development Rebuild",
+			"group": "build",
+			"command": "Engine\\Build\\BatchFiles\\Build.bat",
+			"args": [
+				"BattleTank",
+				"IOS",
+				"Development",
+				"D:\\Unreal Engine\\Learning\\UE learning\\Games\\Udemy_UECPP_BattleTank\\BattleTank\\BattleTank.uproject",
+				"-waitmutex"
+			],
+			"problemMatcher": "$msCompile",
+			"dependsOn": [
+				"BattleTank IOS Development Clean"
+			],
+			"type": "shell",
+			"options": {
+				"cwd": "C:\\Epic Games\\UE_4.26"
+			}
+		},
+		{
+			"label": "BattleTank IOS Development Clean",
+			"group": "build",
+			"command": "Engine\\Build\\BatchFiles\\Clean.bat",
+			"args": [
+				"BattleTank",
+				"IOS",
+				"Development",
+				"D:\\Unreal Engine\\Learning\\UE learning\\Games\\Udemy_UECPP_BattleTank\\BattleTank\\BattleTank.uproject",
+				"-waitmutex"
+			],
+			"problemMatcher": "$msCompile",
+			"type": "shell",
+			"options": {
+				"cwd": "C:\\Epic Games\\UE_4.26"
+			}
+		},
+		{
+			"label": "BattleTank IOS Shipping Build",
+			"group": "build",
+			"command": "Engine\\Build\\BatchFiles\\Build.bat",
+			"args": [
+				"BattleTank",
+				"IOS",
+				"Shipping",
+				"D:\\Unreal Engine\\Learning\\UE learning\\Games\\Udemy_UECPP_BattleTank\\BattleTank\\BattleTank.uproject",
+				"-waitmutex"
+			],
+			"problemMatcher": "$msCompile",
+			"type": "shell",
+			"options": {
+				"cwd": "C:\\Epic Games\\UE_4.26"
+			}
+		},
+		{
+			"label": "BattleTank IOS Shipping Rebuild",
+			"group": "build",
+			"command": "Engine\\Build\\BatchFiles\\Build.bat",
+			"args": [
+				"BattleTank",
+				"IOS",
+				"Shipping",
+				"D:\\Unreal Engine\\Learning\\UE learning\\Games\\Udemy_UECPP_BattleTank\\BattleTank\\BattleTank.uproject",
+				"-waitmutex"
+			],
+			"problemMatcher": "$msCompile",
+			"dependsOn": [
+				"BattleTank IOS Shipping Clean"
+			],
+			"type": "shell",
+			"options": {
+				"cwd": "C:\\Epic Games\\UE_4.26"
+			}
+		},
+		{
+			"label": "BattleTank IOS Shipping Clean",
+			"group": "build",
+			"command": "Engine\\Build\\BatchFiles\\Clean.bat",
+			"args": [
+				"BattleTank",
+				"IOS",
+				"Shipping",
+				"D:\\Unreal Engine\\Learning\\UE learning\\Games\\Udemy_UECPP_BattleTank\\BattleTank\\BattleTank.uproject",
+				"-waitmutex"
+			],
+			"problemMatcher": "$msCompile",
+			"type": "shell",
+			"options": {
+				"cwd": "C:\\Epic Games\\UE_4.26"
+			}
+		},
+		{
+			"label": "BattleTank IOS Test Build",
+			"group": "build",
+			"command": "Engine\\Build\\BatchFiles\\Build.bat",
+			"args": [
+				"BattleTank",
+				"IOS",
+				"Test",
+				"D:\\Unreal Engine\\Learning\\UE learning\\Games\\Udemy_UECPP_BattleTank\\BattleTank\\BattleTank.uproject",
+				"-waitmutex"
+			],
+			"problemMatcher": "$msCompile",
+			"type": "shell",
+			"options": {
+				"cwd": "C:\\Epic Games\\UE_4.26"
+			}
+		},
+		{
+			"label": "BattleTank IOS Test Rebuild",
+			"group": "build",
+			"command": "Engine\\Build\\BatchFiles\\Build.bat",
+			"args": [
+				"BattleTank",
+				"IOS",
+				"Test",
+				"D:\\Unreal Engine\\Learning\\UE learning\\Games\\Udemy_UECPP_BattleTank\\BattleTank\\BattleTank.uproject",
+				"-waitmutex"
+			],
+			"problemMatcher": "$msCompile",
+			"dependsOn": [
+				"BattleTank IOS Test Clean"
+			],
+			"type": "shell",
+			"options": {
+				"cwd": "C:\\Epic Games\\UE_4.26"
+			}
+		},
+		{
+			"label": "BattleTank IOS Test Clean",
+			"group": "build",
+			"command": "Engine\\Build\\BatchFiles\\Clean.bat",
+			"args": [
+				"BattleTank",
+				"IOS",
+				"Test",
+				"D:\\Unreal Engine\\Learning\\UE learning\\Games\\Udemy_UECPP_BattleTank\\BattleTank\\BattleTank.uproject",
+				"-waitmutex"
+			],
+			"problemMatcher": "$msCompile",
+			"type": "shell",
+			"options": {
+				"cwd": "C:\\Epic Games\\UE_4.26"
+			}
+		},
+		{
 			"label": "BattleTankEditor Win64 Debug Build",
 			"group": "build",
 			"command": "Engine\\Build\\BatchFiles\\Build.bat",

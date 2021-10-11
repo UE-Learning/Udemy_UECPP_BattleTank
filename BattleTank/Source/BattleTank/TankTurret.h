@@ -7,7 +7,7 @@
 #include "TankTurret.generated.h"
 
 /**
- * 
+ * Tank Turret C++ class which inherits from UStaticMeshComponent
  */
 UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent), hidecategories = ("Collision") )
 class BATTLETANK_API UTankTurret : public UStaticMeshComponent
