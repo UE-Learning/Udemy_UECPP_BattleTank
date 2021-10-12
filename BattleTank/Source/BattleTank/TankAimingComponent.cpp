@@ -73,18 +73,24 @@ void UTankAimingComponent::AimAt(FVector HitLocation, float LaunchSpeed)
 		FString ThisTankName = GetOwner()->GetName();
 		UE_LOG(LogTemp, Warning, TEXT("%s is aiming at %s"), *ThisTankName, *AimDirection.ToString());
 		*/
+		/*
 		float Time = GetWorld()->GetTimeSeconds();       // to make sure this method is ticking (called from Tick function)
     	UE_LOG(LogTemp, Warning, TEXT("At time %f, Aim solution found"), Time);
+		*/
 
 		MoveBarrelTowards(AimDirection);
 
 	}
+	/*
 	else
 	{
+		
 		// eg. aiming at too far away mountain, given launch speed won't reach it, so SuggestProjectileVelocity will return false for player tank (AI tank will return true due to player within reach of projectile)
 		float Time = GetWorld()->GetTimeSeconds();       // to make sure this method is ticking (called from Tick function)
 		UE_LOG(LogTemp, Warning, TEXT("At time %f, No aim solution found"), Time);   
+		
 	}
+	*/
 }
 
 // it also moves turret

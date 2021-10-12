@@ -11,6 +11,7 @@ void ATankPlayerController::BeginPlay()
     Super::BeginPlay(); // construct base's constructor's stuff first
 
     //Debug lines
+    /*
     auto ControlledTank = GetControlledTank();  //auto keyword is saying that ControlledTank variable is the type being initialized which is ATank*
     if (!ControlledTank)
     {
@@ -20,6 +21,7 @@ void ATankPlayerController::BeginPlay()
     {
         UE_LOG(LogTemp, Warning, TEXT("PlayerController is possessing %s"), *(ControlledTank->GetName()));
     }
+    */
 }
 
 // Called every frame

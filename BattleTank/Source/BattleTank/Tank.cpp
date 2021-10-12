@@ -3,6 +3,7 @@
 
 #include "Projectile.h"
 #include "TankAimingComponent.h"
+#include "TankMovementComponent.h"
 #include "TankBarrel.h"
 #include "Tank.h"
 
@@ -15,7 +16,7 @@ ATank::ATank()
 	// Constructing subobject (member variable) of UTankAimingComponent during construction of owning class (ATank)
 	// no need to protect the pointer as added at construction
 	TankAimingComponent = CreateDefaultSubobject<UTankAimingComponent> (FName("Aiming Component"));
-
+	
 }
 
 // Called when the game starts or when spawned

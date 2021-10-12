@@ -22,6 +22,6 @@ class BATTLETANK_API UTankTrack : public UStaticMeshComponent
 
 	// Max force per track, in Newtons
 	UPROPERTY(EditDefaultsOnly)
-	float TrackMaxDrivingForce = 400000;  // sensible initial values in Newton (F = m x a), mass is 40 tons, aceleration is 1g or 10ms-2
+	float TrackMaxDrivingForce = 40000000;  // sensible initial values in 400,000 Newton (F = m x a), mass is 40 tons, aceleration is 1g or 10ms-2
 	
 };

@@ -10,6 +10,7 @@ class UTankBarrel;  // Forward declaration
 class UTankAimingComponent;  // Forward declaration which allows us to include header file in .cpp file instead of here in .h file
 class UTankTurret;  // Forward declaration
 class AProjectile;  // Forward declaration
+class UTankMovementComponent;
 
 UCLASS()
 class BATTLETANK_API ATank : public APawn
@@ -41,6 +42,9 @@ private:
 
 protected:
 	UTankAimingComponent* TankAimingComponent = nullptr;
+
+	//UPROPERTY(BlueprintReadOnly)
+	UTankMovementComponent* TankMovementComponent = nullptr;
 
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
