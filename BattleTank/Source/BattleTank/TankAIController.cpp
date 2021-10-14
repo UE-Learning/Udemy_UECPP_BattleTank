@@ -51,12 +51,15 @@ void ATankAIController::Tick(float DeltaTime)
     //Note: we won't try to cast it before checking null pointer because the cast will fail if PlayerPawn is nullptr
     if (PlayerTank)
     {
+        // Move towards player
+        MoveToActor(PlayerTank, AcceptanceRadius);
+
+
         ControlledTank->AimAt(PlayerTank->GetActorLocation());
+        
+        // Fire if ready (checking the reloading time is done in Tank's Fire function. Otherwise, AI tank will fire every frame)
+        ControlledTank->Fire();
     }
-
-    // Fire if ready (checking the reloading time is done in Tank's Fire function. Otherwise, AI tank will fire every frame)
-    ControlledTank->Fire();
-
 }
 
 
