@@ -10,6 +10,16 @@
 class UTankBarrel;   // Forward declaration
 class UTankTurret;   // Forward declaration
 
+// enum variable type for storing different firing readiness state
+UENUM()
+enum class EFiringState : uint8
+{
+	Reloading,
+	Aiming,
+	Locked
+};
+
+
 // Tank Aiming Component class object which is a member variable of Tank class  (we can see this comment in BP editor)
 
 UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
@@ -21,14 +31,20 @@ public:
 	// Sets default values for this component's properties
 	UTankAimingComponent();
 
-	void SetBarrelReference (UTankBarrel* BarrelToSet);
+	/*void SetBarrelReference (UTankBarrel* BarrelToSet);
 
-	void SetTurretReference (UTankTurret* TurretToSet);
-
-public:	
+	void SetTurretReference (UTankTurret* TurretToSet);*/
 
 	// Aim at the location represented by FVector parameter
 	void AimAt(FVector HitLocation, float LaunchSpeed);
+
+	UFUNCTION(BlueprintCallable, Category = "Setup")
+	void Initialize(UTankBarrel* BarrelToSet, UTankTurret* TurretToSet);
+
+protected:
+
+	UPROPERTY(BlueprintReadOnly, Category = "State")
+	EFiringState FiringState = EFiringState::Reloading;
 
 private:
 
@@ -39,5 +55,6 @@ private:
 
 	// Reference for Turret which used to be a UStaticMeshComponent
 	UTankTurret* Turret = nullptr;
+
 		
 };

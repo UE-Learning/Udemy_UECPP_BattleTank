@@ -2,6 +2,7 @@
 
 
 #include "Tank.h"
+#include "TankAimingComponent.h"
 #include "TankPlayerController.h"
 
 
@@ -22,6 +23,17 @@ void ATankPlayerController::BeginPlay()
         UE_LOG(LogTemp, Warning, TEXT("PlayerController is possessing %s"), *(ControlledTank->GetName()));
     }
     */
+
+   UTankAimingComponent* AimingComponent = GetControlledTank()->FindComponentByClass<UTankAimingComponent>();
+   if (ensure(AimingComponent))
+   {
+        FoundAimingComponent(AimingComponent);
+   }
+   else
+   {
+       UE_LOG(LogTemp, Warning, TEXT("Player Controller can't find Aiming Component at Begin Play"));
+   }
+   
 }
 
 // Called every frame
@@ -48,7 +60,7 @@ ATank* ATankPlayerController::GetControlledTank() const
 // Start the tank moving the barrel so that a shot would hit where the crosshair intersects the world
 void ATankPlayerController::AimTowardsCrosshair()
 {
-    if (!GetControlledTank())  
+    if (!ensure(GetControlledTank()))  
     {
         return;
     }
@@ -81,12 +93,12 @@ bool ATankPlayerController::GetSightRayHitLocation(FVector& HitLocation) const
 
     // Getting the direction the crosshair is looking. It means getting a Unit Vector whose direction is from camera toward crosshair
     FVector LookDirection;
-    if(GetLookDirection(ScreenLocation, LookDirection))
+    if(ensure(GetLookDirection(ScreenLocation, LookDirection)))
     {
         //UE_LOG(LogTemp, Warning, TEXT("Look direction of crosshair in pixel values : %s"), *LookDirection.ToString());
         
         // Line trace along that look direction and see what we hit up to max range
-        if (GetLookVectorHitLocation(LookDirection, HitLocation))
+        if (ensure(GetLookVectorHitLocation(LookDirection, HitLocation)))
         {
             //log the location of the object the ray hit
             //UE_LOG(LogTemp, Warning, TEXT("The location of the object hit by crosshair : %s"), *HitLocation.ToString());

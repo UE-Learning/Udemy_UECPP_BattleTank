@@ -3,6 +3,7 @@
 
 #include "Tank.h"
 #include "TankAIController.h"
+// Also Depends on Movement Component via AI NavMesh Pathfinding system
 
 
 void ATankAIController::BeginPlay()
@@ -49,7 +50,7 @@ void ATankAIController::Tick(float DeltaTime)
     PlayerTank = Cast<ATank> (GetWorld()->GetFirstPlayerController()->GetPawn());
     auto ControlledTank = Cast<ATank> (GetPawn());
     //Note: we won't try to cast it before checking null pointer because the cast will fail if PlayerPawn is nullptr
-    if (PlayerTank)
+    if (ensure(PlayerTank))
     {
         // Move towards player
         MoveToActor(PlayerTank, AcceptanceRadius);

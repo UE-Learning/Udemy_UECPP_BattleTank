@@ -15,9 +15,14 @@ UTankAimingComponent::UTankAimingComponent()
 	// ...
 }
 
+void UTankAimingComponent::Initialize(UTankBarrel* BarrelToSet, UTankTurret* TurretToSet)
+{
+	Barrel = BarrelToSet;
+	Turret = TurretToSet;
+}
 
 // Need public function to set value of private member variable.
-void UTankAimingComponent::SetBarrelReference (UTankBarrel* BarrelToSet)
+/*void UTankAimingComponent::SetBarrelReference (UTankBarrel* BarrelToSet)
 {
 	if(!BarrelToSet)
 	{
@@ -35,7 +40,7 @@ void UTankAimingComponent::SetTurretReference (UTankTurret* TurretToSet)
 		return;
 	}
 	Turret = TurretToSet;
-}
+}*/
 
 // Aim at the location represented by FVector parameter
 void UTankAimingComponent::AimAt(FVector HitLocation, float LaunchSpeed)
@@ -46,7 +51,7 @@ void UTankAimingComponent::AimAt(FVector HitLocation, float LaunchSpeed)
 	UE_LOG(LogTemp, Warning, TEXT("%s is aiming at : %s from %s with %f speed"), *ThisTankName, *HitLocation.ToString(), *BarrelLocation.ToString(), LaunchSpeed);
 	*/
 
-	if (!Barrel)  // protect from null pointer error
+	if (!ensure(Barrel))  // protect from null pointer error
 	{
 		return;
 	}
@@ -96,6 +101,10 @@ void UTankAimingComponent::AimAt(FVector HitLocation, float LaunchSpeed)
 // it also moves turret
 void UTankAimingComponent::MoveBarrelTowards(FVector AimDirection)
 {
+	if (!ensure(Barrel) || !ensure(Turret))
+	{
+		return;
+	}
 	// Calculate difference between current barrel rotation and AimDirection
 	FRotator BarrelRotator = Barrel->GetForwardVector().Rotation();  // get current rotational values
 	FRotator AimAsRotator = AimDirection.Rotation();  // this will be the destination rotational values

@@ -7,9 +7,10 @@
 #include "TankPlayerController.generated.h"
 
 class ATank;  // Forward declaration
+class UTankAimingComponent;
 
 /**
- * 
+ *  Responsible for helping the player aim
  */
 UCLASS()
 class BATTLETANK_API ATankPlayerController : public APlayerController
@@ -25,6 +26,10 @@ class BATTLETANK_API ATankPlayerController : public APlayerController
 
 		UPROPERTY(EditAnywhere)
 		float LineTraceRange = 1000000.f;   // Maximum range of line trace for hit target (10km's equivalent value in cm).
+
+	protected:
+		UFUNCTION(BlueprintImplementableEvent, Category = "Setup")
+		void FoundAimingComponent (UTankAimingComponent* AimCompRef);
 	
 	public:
 		
@@ -33,6 +38,7 @@ class BATTLETANK_API ATankPlayerController : public APlayerController
 		// Called every frame
 		virtual void Tick(float DeltaTime) override;
 
+		UFUNCTION(BlueprintCallable, Category = "Setup")
 		ATank* GetControlledTank() const;
 
 		// Start the tank moving the barrel so that a shot would hit where the crosshair intersects the world
