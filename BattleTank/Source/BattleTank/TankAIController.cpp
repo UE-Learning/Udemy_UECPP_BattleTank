@@ -1,7 +1,8 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 
-#include "Tank.h"
+/*#include "Tank.h"*/
+#include "TankAimingComponent.h"
 #include "TankAIController.h"
 // Also Depends on Movement Component via AI NavMesh Pathfinding system
 
@@ -46,21 +47,28 @@ void ATankAIController::Tick(float DeltaTime)
     
     // tell controlled tank to aim at player.
     // don't forget to protect pointer by checking if there is a valid player tank
-    ATank* PlayerTank = nullptr;
-    PlayerTank = Cast<ATank> (GetWorld()->GetFirstPlayerController()->GetPawn());
-    auto ControlledTank = Cast<ATank> (GetPawn());
+    APawn* PlayerTank = GetWorld()->GetFirstPlayerController()->GetPawn();
+    APawn* ControlledTank = GetPawn();
+    UTankAimingComponent* AimingComponent = GetPawn()->FindComponentByClass<UTankAimingComponent>();
+      
     //Note: we won't try to cast it before checking null pointer because the cast will fail if PlayerPawn is nullptr
-    if (ensure(PlayerTank))
+    if (!ensure(PlayerTank && ControlledTank))
     {
-        // Move towards player
-        MoveToActor(PlayerTank, AcceptanceRadius);
-
-
-        ControlledTank->AimAt(PlayerTank->GetActorLocation());
-        
-        // Fire if ready (checking the reloading time is done in Tank's Fire function. Otherwise, AI tank will fire every frame)
-        ControlledTank->Fire();
+        return;
     }
+    if (!ensure(AimingComponent))
+    {
+        return;
+    }
+    
+    // Move towards player
+    MoveToActor(PlayerTank, AcceptanceRadius);
+
+    AimingComponent->AimAt(PlayerTank->GetActorLocation());
+    
+    // Fire if ready (checking the reloading time is done in Tank's Fire function. Otherwise, AI tank will fire every frame)
+    /*ControlledTank->Fire();*/
+    AimingComponent->Fire();
 }
 
 

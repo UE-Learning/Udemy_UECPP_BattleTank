@@ -1,7 +1,7 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 
-#include "Tank.h"
+/*#include "Tank.h"*/
 #include "TankAimingComponent.h"
 #include "TankPlayerController.h"
 
@@ -24,15 +24,15 @@ void ATankPlayerController::BeginPlay()
     }
     */
 
-   UTankAimingComponent* AimingComponent = GetControlledTank()->FindComponentByClass<UTankAimingComponent>();
+   UTankAimingComponent* AimingComponent = GetPawn()->FindComponentByClass<UTankAimingComponent>();
    if (ensure(AimingComponent))
    {
         FoundAimingComponent(AimingComponent);
    }
-   else
+   /*else
    {
        UE_LOG(LogTemp, Warning, TEXT("Player Controller can't find Aiming Component at Begin Play"));
-   }
+   }*/
    
 }
 
@@ -51,25 +51,26 @@ void ATankPlayerController::Tick(float DeltaTime)
 
 
 //return the pawn that PlayerContrller is currently possessing (type cased into ATank)
-ATank* ATankPlayerController::GetControlledTank() const
+/*APawn* ATankPlayerController::GetControlledTank() const
 {
-    return Cast<ATank> (GetPawn()); 
+    return (GetPawn()); 
     
-}
+}*/
 
 // Start the tank moving the barrel so that a shot would hit where the crosshair intersects the world
 void ATankPlayerController::AimTowardsCrosshair()
 {
-    if (!ensure(GetControlledTank()))  
-    {
+   UTankAimingComponent* AimingComponent = GetPawn()->FindComponentByClass<UTankAimingComponent>();
+   if (!ensure(AimingComponent))
+   {
         return;
-    }
+   }
 
    FVector HitLocation;   //Out parameter so their values will be assigned by fuction after being passed by reference
    if (GetSightRayHitLocation(HitLocation))
    {
        // tell controlled tank to aim at this point.
-       GetControlledTank()->AimAt(HitLocation);
+       AimingComponent->AimAt(HitLocation);
    }
 
 }

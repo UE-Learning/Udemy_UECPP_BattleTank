@@ -1,6 +1,6 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
-
+#include "Projectile.h"
 #include "TankBarrel.h"
 #include "TankTurret.h"
 #include "TankAimingComponent.h"
@@ -10,9 +10,43 @@ UTankAimingComponent::UTankAimingComponent()
 {
 	// Set this component to be initialized when the game starts, and to be ticked every frame.  You can turn these features
 	// off to improve performance if you don't need them.
-	PrimaryComponentTick.bCanEverTick = false;
+	PrimaryComponentTick.bCanEverTick = true;
 
 	// ...
+}
+
+void UTankAimingComponent::BeginPlay()
+{
+    Super::BeginPlay(); // construct base's constructor's stuff first
+	LastFireTime = FPlatformTime::Seconds();  // so that first fire is after initial reload
+
+}
+
+void UTankAimingComponent::TickComponent(float DeltaTime, enum ELevelTick TickType, FActorComponentTickFunction *ThisTickFunction)
+{
+	//UE_LOG(LogTemp, Warning, TEXT("Aiming Component is ticking"));
+	if ((FPlatformTime::Seconds() - LastFireTime) < ReloadTimeInSeconds)
+	{
+		FiringState = EFiringState::Reloading;
+	}
+	else if (IsBarrelMoving())
+	{
+		FiringState = EFiringState::Aiming;
+	}
+	else 
+	{
+		FiringState = EFiringState::Locked;
+	}
+}
+
+bool UTankAimingComponent::IsBarrelMoving()
+{
+	float Tolerance = 0.01;
+	if (!ensure(Barrel))
+	{
+		return false;
+	}
+	return (!Barrel->GetForwardVector().Equals(AimDirection, Tolerance));
 }
 
 void UTankAimingComponent::Initialize(UTankBarrel* BarrelToSet, UTankTurret* TurretToSet)
@@ -43,7 +77,7 @@ void UTankAimingComponent::SetTurretReference (UTankTurret* TurretToSet)
 }*/
 
 // Aim at the location represented by FVector parameter
-void UTankAimingComponent::AimAt(FVector HitLocation, float LaunchSpeed)
+void UTankAimingComponent::AimAt(FVector HitLocation)
 {
 	/*
 	FString ThisTankName = GetOwner()->GetName();
@@ -73,7 +107,7 @@ void UTankAimingComponent::AimAt(FVector HitLocation, float LaunchSpeed)
 
 	if (bHaveAimSolution)
 	{
-		FVector AimDirection = OutLaunchVelocity.GetSafeNormal();   // GetSafeNormal return a unit vector
+		AimDirection = OutLaunchVelocity.GetSafeNormal();   // GetSafeNormal return a unit vector
 		/*
 		FString ThisTankName = GetOwner()->GetName();
 		UE_LOG(LogTemp, Warning, TEXT("%s is aiming at %s"), *ThisTankName, *AimDirection.ToString());
@@ -83,7 +117,7 @@ void UTankAimingComponent::AimAt(FVector HitLocation, float LaunchSpeed)
     	UE_LOG(LogTemp, Warning, TEXT("At time %f, Aim solution found"), Time);
 		*/
 
-		MoveBarrelTowards(AimDirection);
+		MoveBarrelTowards();
 
 	}
 	/*
@@ -99,7 +133,7 @@ void UTankAimingComponent::AimAt(FVector HitLocation, float LaunchSpeed)
 }
 
 // it also moves turret
-void UTankAimingComponent::MoveBarrelTowards(FVector AimDirection)
+void UTankAimingComponent::MoveBarrelTowards()
 {
 	if (!ensure(Barrel) || !ensure(Turret))
 	{
@@ -116,3 +150,24 @@ void UTankAimingComponent::MoveBarrelTowards(FVector AimDirection)
 	Turret->Rotate(DeltaRotator.Yaw);
 }
 
+void UTankAimingComponent::Fire()
+{
+	if (!ensure(Barrel))   // null pointer logic error
+	{
+		return;
+	}
+	
+	if (FiringState != EFiringState::Reloading)
+	{
+		// Spawn a projectile at sotcket location on the barrel
+		AProjectile* Projectile = GetWorld()->SpawnActor<AProjectile>(
+				ProjectileBlueprint,
+				Barrel->GetSocketLocation(FName("Projectile")),  // Projectile is the socket name on barrel
+				Barrel->GetSocketRotation(FName("Projectile"))
+		);
+
+		// launch the projectile with given speed
+		Projectile->LaunchProjectile(LaunchSpeed);
+		LastFireTime = FPlatformTime::Seconds();
+	}
+}

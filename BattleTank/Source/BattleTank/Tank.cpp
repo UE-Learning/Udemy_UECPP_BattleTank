@@ -1,9 +1,9 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 
-#include "Projectile.h"
+/*#include "Projectile.h"
 #include "TankAimingComponent.h"
-#include "TankBarrel.h"
+#include "TankBarrel.h"*/
 #include "Tank.h"
 
 // Sets default values
@@ -19,11 +19,14 @@ ATank::ATank()
 }
 
 // Called when the game starts or when spawned
+/*
 void ATank::BeginPlay()
 {
 	Super::BeginPlay();    // This Super:: call is needed for Tank_BP's Begin Play to run
-	
-}
+
+	TankAimingComponent = FindComponentByClass<UTankAimingComponent>();  // get the component from this Tank object	
+	Barrel = FindComponentByClass<UTankBarrel>();
+} */
 
 
 // Called to bind functionality to input
@@ -34,17 +37,15 @@ void ATank::BeginPlay()
 }*/
 
 
-void ATank::AimAt(FVector HitLocation)
+/*void ATank::AimAt(FVector HitLocation)
 {
 	// Delagating the actual aiming job to subobject's function
-	if (!ensure(TankAimingComponent))  // null pointer logic error
+	if (!ensure(TankAimingComponent))  
 	{
 		return;
 	}
 	TankAimingComponent->AimAt(HitLocation, LaunchSpeed);
-
-	
-}
+}*/
 
 
 // Pass Tank's component barrel reference to set subobject's member variable with it
@@ -61,7 +62,7 @@ void ATank::SetTurretReference(UTankTurret* TurretToSet)
 	TankAimingComponent->SetTurretReference(TurretToSet);
 }
 */
-
+/*
 void ATank::Fire()
 {
 	bool bIsReloaded = true;
@@ -85,4 +86,5 @@ void ATank::Fire()
 		LastFireTime = FPlatformTime::Seconds();
 	}
 }
+*/
 

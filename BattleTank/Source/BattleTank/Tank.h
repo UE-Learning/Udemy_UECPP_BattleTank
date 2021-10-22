@@ -6,10 +6,10 @@
 #include "GameFramework/Pawn.h"
 #include "Tank.generated.h"    //put new includes above
 
-class UTankBarrel;  // Forward declaration
+/*class UTankBarrel;  // Forward declaration
 class UTankAimingComponent;  // Forward declaration which allows us to include header file in .cpp file instead of here in .h file
 class UTankTurret;  // Forward declaration
-class AProjectile;  // Forward declaration
+class AProjectile;  // Forward declaration */
 
 UCLASS()
 class BATTLETANK_API ATank : public APawn
@@ -24,10 +24,11 @@ private:
 	/*virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;	*/
 
 	// Variables
-	UPROPERTY(EditAnywhere, Category = "Firing")
+	/*UPROPERTY(EditAnywhere, Category = "Firing")
 	float LaunchSpeed = 4000;  // sensible starting value of 40 m/s (if value is too large, projectile can reach everywhere removing the need to move tank)
+	*/
 
-	UPROPERTY(EditAnywhere, Category = "Setup")
+	/*UPROPERTY(EditAnywhere, Category = "Setup")
 	TSubclassOf<AProjectile> ProjectileBlueprint;
 	// UClass* ProjectileBlueprint;    // alternative to TSubclassOf <>
 
@@ -36,18 +37,18 @@ private:
 	UPROPERTY(EditAnywhere, Category = "Firing")
 	float ReloadTimeInSeconds = 3;  // 3 sec reload time, can't fire more than once in 3 seconds
 
-	double LastFireTime = 0;  // initialized as 0 sec, reassign with current time after firing
+	double LastFireTime = 0;  // initialized as 0 sec, reassign with current time after firing */
 
 
 protected:
-	UPROPERTY(BlueprintReadOnly)
-	UTankAimingComponent* TankAimingComponent = nullptr;
+	/*UPROPERTY(BlueprintReadOnly)
+	UTankAimingComponent* TankAimingComponent = nullptr;*/
 
 	//UPROPERTY(BlueprintReadOnly)
 	/*UTankMovementComponent* TankMovementComponent = nullptr;*/
 
 	// Called when the game starts or when spawned
-	virtual void BeginPlay() override;
+	/*virtual void BeginPlay() override;*/
 
 public:
 	
@@ -62,10 +63,10 @@ public:
 	void SetTurretReference(UTankTurret* TurretToSet);*/
 
 	// Aim at (either the object through crossair or player)
-	void AimAt(FVector HitLocation);
+	/*void AimAt(FVector HitLocation);*/
 
-	UFUNCTION(BlueprintCallable, Category = "Firing")
-	void Fire();
+	/*UFUNCTION(BlueprintCallable, Category = "Firing")
+	void Fire();*/
 
 
 };
