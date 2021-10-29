@@ -60,18 +60,23 @@ void ATankPlayerController::Tick(float DeltaTime)
 // Start the tank moving the barrel so that a shot would hit where the crosshair intersects the world
 void ATankPlayerController::AimTowardsCrosshair()
 {
-   UTankAimingComponent* AimingComponent = GetPawn()->FindComponentByClass<UTankAimingComponent>();
-   if (!ensure(AimingComponent))
-   {
+    if (!GetPawn()) 
+    {
         return;
-   }
+    }
+    UTankAimingComponent* AimingComponent = GetPawn()->FindComponentByClass<UTankAimingComponent>();
+    if (!ensure(AimingComponent))
+    {
+        return;
+    }
 
-   FVector HitLocation;   //Out parameter so their values will be assigned by fuction after being passed by reference
-   if (GetSightRayHitLocation(HitLocation))
-   {
+    FVector HitLocation;   //Out parameter so their values will be assigned by fuction after being passed by reference
+    bool bGotHitLocation = GetSightRayHitLocation(HitLocation);
+    if (bGotHitLocation)
+    {
        // tell controlled tank to aim at this point.
        AimingComponent->AimAt(HitLocation);
-   }
+    }
 
 }
 
@@ -99,7 +104,7 @@ bool ATankPlayerController::GetSightRayHitLocation(FVector& HitLocation) const
         //UE_LOG(LogTemp, Warning, TEXT("Look direction of crosshair in pixel values : %s"), *LookDirection.ToString());
         
         // Line trace along that look direction and see what we hit up to max range
-        if (ensure(GetLookVectorHitLocation(LookDirection, HitLocation)))
+        /*if (ensure(GetLookVectorHitLocation(LookDirection, HitLocation)))
         {
             //log the location of the object the ray hit
             //UE_LOG(LogTemp, Warning, TEXT("The location of the object hit by crosshair : %s"), *HitLocation.ToString());
@@ -109,11 +114,12 @@ bool ATankPlayerController::GetSightRayHitLocation(FVector& HitLocation) const
         else
         {
             //UE_LOG(LogTemp, Warning, TEXT("Invalid target by crosshair : %s"), *HitLocation.ToString());
-        }
+        }*/
+        return GetLookVectorHitLocation(LookDirection, HitLocation);
 
     }
     
-    return true;
+    return false;
 
     // return false; // ray doesn't hit anything
 }
