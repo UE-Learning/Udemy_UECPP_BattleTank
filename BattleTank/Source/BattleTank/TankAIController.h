@@ -24,7 +24,7 @@ class BATTLETANK_API ATankAIController : public AAIController
 
 		// How close AI tank can get near player
 		//UPROPERTY(EditAnywhere)
-		float AcceptanceRadius = 3000;  // check if it is in cm
+		float AcceptanceRadius = 6000;  // check if it is in cm
 
 		/*
 		ATank* GetPlayerTank() const;  //to get the pawn (ATank) possessed by ATankPlayerController

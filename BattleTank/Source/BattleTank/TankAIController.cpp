@@ -68,7 +68,10 @@ void ATankAIController::Tick(float DeltaTime)
     
     // Fire if ready (checking the reloading time is done in Tank's Fire function. Otherwise, AI tank will fire every frame)
     /*ControlledTank->Fire();*/
-    AimingComponent->Fire();
+    if (AimingComponent->GetFiringState() == EFiringState::Locked)
+    {
+        AimingComponent->Fire();
+    }
 }
 
 
