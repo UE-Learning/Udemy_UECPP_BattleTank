@@ -8,7 +8,7 @@
 AProjectile::AProjectile()
 {
  	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
-	PrimaryActorTick.bCanEverTick = true;
+	PrimaryActorTick.bCanEverTick = false;
 	
 	CollisionMesh = CreateDefaultSubobject<UStaticMeshComponent>(FName("Collision Mesh"));
 	SetRootComponent(CollisionMesh);
@@ -21,6 +21,10 @@ AProjectile::AProjectile()
 	ProjectileMovement = CreateDefaultSubobject<UProjectileMovementComponent> (FName("Projectile Movement"));
 	ProjectileMovement->bAutoActivate = false;
 
+	ImpactBlast = CreateDefaultSubobject<UParticleSystemComponent>(FName("Impact Blast"));
+	ImpactBlast->SetupAttachment(CollisionMesh);
+	ImpactBlast->bAutoActivate = false;
+
 	
 
 }
@@ -29,15 +33,30 @@ AProjectile::AProjectile()
 void AProjectile::BeginPlay()
 {
 	Super::BeginPlay();
+
+	CollisionMesh->OnComponentHit.AddDynamic(this, &AProjectile::OnHit);
+
 	
 }
 
+
+void AProjectile::OnHit(UPrimitiveComponent* HitComponent, AActor* OtherActor, UPrimitiveComponent* OtherComponent, FVector NormalImpulse, const FHitResult& Hit)
+{
+    //UE_LOG(LogTemp, Warning, TEXT("%s Track is being hit!"), *GetOwner()->GetName());
+    
+	LaunchBlast->Deactivate();
+	ImpactBlast->Activate();
+
+}
+
+
+/*
 // Called every frame
 void AProjectile::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
-}
+}*/
 
 // will be called from Tank class's Fire function using Projectile object spawned by SpawnActor.
 void AProjectile::LaunchProjectile(float Speed)

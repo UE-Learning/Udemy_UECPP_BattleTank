@@ -27,11 +27,19 @@ protected:
 
 	UPROPERTY(VisibleAnywhere, Category = "Components")
 	UParticleSystemComponent* LaunchBlast = nullptr;
+
+	UPROPERTY(VisibleAnywhere, Category = "Components")
+	UParticleSystemComponent* ImpactBlast = nullptr;
 	
 
 public:	
 	// Called every frame
-	virtual void Tick(float DeltaTime) override;
+	/*virtual void Tick(float DeltaTime) override;*/
 	void LaunchProjectile (float Speed);  // will be called from Tank class's Fire function using Projectile object spawned by SpawnActor.
+
+private:
+	UFUNCTION()
+	void OnHit(UPrimitiveComponent* HitComponent, AActor* OtherActor, UPrimitiveComponent* OtherComponent, FVector NormalImpulse, const FHitResult& Hit);
+
 
 };
