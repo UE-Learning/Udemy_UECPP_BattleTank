@@ -3,6 +3,7 @@
 
 #include "Projectile.h"
 #include "Particles/ParticleSystemComponent.h"
+#include "Kismet/GameplayStatics.h"
 
 // Sets default values
 AProjectile::AProjectile()
@@ -52,7 +53,28 @@ void AProjectile::OnHit(UPrimitiveComponent* HitComponent, AActor* OtherActor, U
 
 	ExplosionForce->FireImpulse();
 
+	SetRootComponent(ImpactBlast);  // we don't want to destroy root CollisionMesh so we change root
+	CollisionMesh->DestroyComponent();
+
+	UGameplayStatics::ApplyRadialDamage(
+		this,
+		ProjectileDamage,
+		GetActorLocation(),  // Origin of damage
+		ExplosionForce->Radius,  // radial force component (ExplosionForce)'s radius value from BP (1000)
+		UDamageType::StaticClass(),
+		TArray<AActor*> ()  // array of actors that will receive damage, here, this means it will damage all actors.
+	);
+
+	FTimerHandle Timer; //outparameter
+	GetWorld()->GetTimerManager().SetTimer(Timer, this, &AProjectile::OnTimerExpire, DestroyDelay, false);
+
 }
+
+void AProjectile::OnTimerExpire()
+{
+	Destroy();
+}
+
 
 
 /*

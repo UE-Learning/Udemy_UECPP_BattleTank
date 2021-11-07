@@ -34,12 +34,19 @@ protected:
 
 	UPROPERTY(VisibleAnywhere, Category = "Components")
 	URadialForceComponent* ExplosionForce = nullptr;
+
+	UPROPERTY(EditDefaultsOnly, Category = "Setup")
+	float DestroyDelay = 10.f;
+
+	UPROPERTY(EditDefaultsOnly, Category = "Setup")
+	float ProjectileDamage = 10.f;
 	
 
 public:	
 	// Called every frame
 	/*virtual void Tick(float DeltaTime) override;*/
 	void LaunchProjectile (float Speed);  // will be called from Tank class's Fire function using Projectile object spawned by SpawnActor.
+	void OnTimerExpire();
 
 private:
 	UFUNCTION()

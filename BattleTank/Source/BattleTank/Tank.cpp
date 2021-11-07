@@ -18,6 +18,22 @@ ATank::ATank()
 	
 }
 
+float ATank::TakeDamage(float DamageAmount, struct FDamageEvent const & DamageEvent, class AController* EventInstigator, AActor* DamageCauser)
+{
+	int32 DamagePoint = FPlatformMath::RoundToInt(DamageAmount);  // convert damage (float) into damage point (integer)
+	int32 DamageToApply = FMath::Clamp(DamagePoint, 0, CurrentHealth);
+	
+	CurrentHealth -= DamageToApply;
+	if (CurrentHealth <= 0)
+	{
+		UE_LOG(LogTemp, Warning, TEXT("Tank died"));
+	}
+	UE_LOG(LogTemp, Warning, TEXT("DamageAmount = %f, DamageToApply = %i"), DamageAmount, DamageToApply);
+	
+	return DamageToApply;
+} 
+
+
 // Called when the game starts or when spawned
 /*
 void ATank::BeginPlay()

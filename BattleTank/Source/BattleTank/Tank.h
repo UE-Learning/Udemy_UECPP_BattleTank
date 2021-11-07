@@ -17,8 +17,14 @@ class BATTLETANK_API ATank : public APawn
 	GENERATED_BODY()
 
 private:
-	// Sets default values for this pawn's properties
-	ATank();  //a constructor
+
+	UPROPERTY(EditDefaultsOnly, Category = "Setup")
+	int32 StartingHealth = 100;
+
+	UPROPERTY(VisibleAnywhere, Category = "Health")
+	int32 CurrentHealth = StartingHealth;
+	
+	
 
 	// Called to bind functionality to input
 	/*virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;	*/
@@ -51,7 +57,8 @@ protected:
 	/*virtual void BeginPlay() override;*/
 
 public:
-	
+	// Sets default values for this pawn's properties
+	ATank();  //a constructor
 
 	// Pass Tank's component barrel reference to set subobject's member variable with it
 	// We also want to expose this func to blueprint editor so that the child (Tank_BP) can use it to set up static mesh object's reference
@@ -68,5 +75,8 @@ public:
 	/*UFUNCTION(BlueprintCallable, Category = "Firing")
 	void Fire();*/
 
+	
+	// call by engine when actor damage is dealt.
+	virtual float TakeDamage(float DamageAmount, struct FDamageEvent const & DamageEvent, class AController* EventInstigator, AActor* DamageCauser) override;
 
 };
