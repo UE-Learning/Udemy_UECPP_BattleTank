@@ -3,8 +3,11 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "Delegates/Delegate.h"
 #include "GameFramework/Pawn.h"
 #include "Tank.generated.h"    //put new includes above
+
+DECLARE_DYNAMIC_MULTICAST_DELEGATE(FTankDelegate);
 
 /*class UTankBarrel;  // Forward declaration
 class UTankAimingComponent;  // Forward declaration which allows us to include header file in .cpp file instead of here in .h file
@@ -22,10 +25,8 @@ private:
 	int32 StartingHealth = 100;
 
 	UPROPERTY(VisibleAnywhere, Category = "Health")
-	int32 CurrentHealth = StartingHealth;
+	int32 CurrentHealth;
 	
-	
-
 	// Called to bind functionality to input
 	/*virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;	*/
 
@@ -60,6 +61,10 @@ public:
 	// Sets default values for this pawn's properties
 	ATank();  //a constructor
 
+	virtual void BeginPlay() override;
+
+	FTankDelegate OnDeath;
+
 	// Pass Tank's component barrel reference to set subobject's member variable with it
 	// We also want to expose this func to blueprint editor so that the child (Tank_BP) can use it to set up static mesh object's reference
 	/*UFUNCTION(BlueprintCallable, Category = "Setup")
@@ -78,5 +83,9 @@ public:
 	
 	// call by engine when actor damage is dealt.
 	virtual float TakeDamage(float DamageAmount, struct FDamageEvent const & DamageEvent, class AController* EventInstigator, AActor* DamageCauser) override;
+
+	// return the current health as a percentage of starting health between 0 and 1
+	UFUNCTION(BlueprintPure, Category = "Health")
+	float GetHealthPercent() const;
 
 };

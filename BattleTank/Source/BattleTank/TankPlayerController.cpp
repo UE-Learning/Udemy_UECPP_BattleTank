@@ -4,6 +4,7 @@
 /*#include "Tank.h"*/
 #include "TankAimingComponent.h"
 #include "TankPlayerController.h"
+#include "Tank.h"
 
 
 // Called when the game starts or when spawned
@@ -46,9 +47,37 @@ void ATankPlayerController::Tick(float DeltaTime)
 
     AimTowardsCrosshair();
     
-
 }
 
+void ATankPlayerController::SetPawn(APawn* InPawn)
+{
+    Super::SetPawn(InPawn);
+
+    if (InPawn)
+    {
+        ATank* PossessedTank = Cast<ATank>(InPawn);
+        if (!ensure(PossessedTank))
+        {
+            UE_LOG(LogTemp, Warning, TEXT("No Player Possessed Tank"));
+            return;
+        }
+
+        // Subscribe to broadcast event
+        PossessedTank->OnDeath.AddUniqueDynamic(this, &ATankPlayerController::OnPossessedTankDeath);
+
+    }
+    else
+    {
+        UE_LOG(LogTemp, Warning, TEXT("No Incoming Pawn for player"));
+        return;
+    }
+}
+
+void ATankPlayerController::OnPossessedTankDeath()
+{
+    //UE_LOG(LogTemp, Warning, TEXT("Player Tank died"));
+    StartSpectatingOnly();
+}
 
 //return the pawn that PlayerContrller is currently possessing (type cased into ATank)
 /*APawn* ATankPlayerController::GetControlledTank() const

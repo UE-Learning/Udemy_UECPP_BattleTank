@@ -4,6 +4,7 @@
 /*#include "Tank.h"*/
 #include "TankAimingComponent.h"
 #include "TankAIController.h"
+#include "Tank.h"
 // Also Depends on Movement Component via AI NavMesh Pathfinding system
 
 
@@ -34,6 +35,43 @@ void ATankAIController::BeginPlay()
         UE_LOG(LogTemp, Warning, TEXT("AI controller found player tank : %s"), *(PlayerTank->GetName()));
     }
     */
+
+}
+
+void ATankAIController::SetPawn(APawn* InPawn)
+{
+    Super::SetPawn(InPawn);
+
+    if (InPawn)
+    {
+        ATank* PossessedTank = Cast<ATank>(InPawn);
+        if (!ensure(PossessedTank))
+        {
+            UE_LOG(LogTemp, Warning, TEXT("No Possessed Tank"));
+            return;
+        }
+
+        // Subscribe to broadcast event
+        PossessedTank->OnDeath.AddUniqueDynamic(this, &ATankAIController::OnPossessedTankDeath);
+
+    }
+    else
+    {
+        UE_LOG(LogTemp, Warning, TEXT("No Incoming Pawn"));
+        return;
+    }
+}
+
+// Delegate function that will handle broadcast event
+void ATankAIController::OnPossessedTankDeath()
+{
+    //UE_LOG(LogTemp, Warning, TEXT("AI Tank died"));
+    if (!GetPawn())
+    {
+        return;
+    }
+    GetPawn()->DetachFromControllerPendingDestroy();
+
 
 }
 

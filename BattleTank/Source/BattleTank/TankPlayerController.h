@@ -30,6 +30,8 @@ class BATTLETANK_API ATankPlayerController : public APlayerController
 	protected:
 		UFUNCTION(BlueprintImplementableEvent, Category = "Setup")
 		void FoundAimingComponent (UTankAimingComponent* AimCompRef);
+
+		virtual void SetPawn(APawn* InPawn) override;
 	
 	public:
 		
@@ -52,5 +54,8 @@ class BATTLETANK_API ATankPlayerController : public APlayerController
 
 		// Line Tracing
 		bool GetLookVectorHitLocation(FVector LookDirection, FVector& HitLocation) const;
-	
+
+		UFUNCTION()
+		void OnPossessedTankDeath();
+
 };

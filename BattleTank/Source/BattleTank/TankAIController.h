@@ -26,6 +26,15 @@ class BATTLETANK_API ATankAIController : public AAIController
 		//UPROPERTY(EditAnywhere)
 		float AcceptanceRadius = 6000;  // check if it is in cm
 
+	protected:
+
+		virtual void SetPawn(APawn* InPawn) override;
+
+	public:
+	
+		UFUNCTION()
+		void OnPossessedTankDeath();
+
 		/*
 		ATank* GetPlayerTank() const;  //to get the pawn (ATank) possessed by ATankPlayerController
 		ATank* GetControlledTank() const;
