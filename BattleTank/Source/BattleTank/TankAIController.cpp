@@ -45,7 +45,7 @@ void ATankAIController::SetPawn(APawn* InPawn)
     if (InPawn)
     {
         ATank* PossessedTank = Cast<ATank>(InPawn);
-        if (!ensure(PossessedTank))
+        if (!PossessedTank)
         {
             UE_LOG(LogTemp, Warning, TEXT("No Possessed Tank"));
             return;
