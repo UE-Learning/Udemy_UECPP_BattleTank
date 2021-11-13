@@ -24,9 +24,15 @@ protected:
 	// Called when the game starts
 	virtual void BeginPlay() override;
 
+	UPROPERTY() 
+	AActor* SpawnedActor = nullptr;
+
+
 public:	
 	// Called every frame
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
+
+	AActor* GetSpawnedActor() const { return SpawnedActor; }
 
 		
 };
