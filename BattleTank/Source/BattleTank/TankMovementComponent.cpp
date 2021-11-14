@@ -40,8 +40,8 @@ void UTankMovementComponent::IntendTurnRight(float Throw)
     }
 
     //move according to the throw value by calling Track's SetThrottle function
-    LeftTrack->SetThrottle(2 * Throw);
-    RightTrack->SetThrottle(-2 * Throw);
+    LeftTrack->SetThrottle(1 * Throw);
+    RightTrack->SetThrottle(-1 * Throw);
 
     //If you want to prevent doubling the Throw due to using both left stick and AD ZC keys, unbind the keyboard inputs
 }

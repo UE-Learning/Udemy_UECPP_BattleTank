@@ -24,7 +24,7 @@ void ATankPlayerController::BeginPlay()
         UE_LOG(LogTemp, Warning, TEXT("PlayerController is possessing %s"), *(ControlledTank->GetName()));
     }
     */
-
+   if(!GetPawn()) return;
    UTankAimingComponent* AimingComponent = GetPawn()->FindComponentByClass<UTankAimingComponent>();
    if (ensure(AimingComponent))
    {

@@ -90,11 +90,11 @@ void ATankAIController::Tick(float DeltaTime)
     UTankAimingComponent* AimingComponent = GetPawn()->FindComponentByClass<UTankAimingComponent>();
       
     //Note: we won't try to cast it before checking null pointer because the cast will fail if PlayerPawn is nullptr
-    if (!ensure(PlayerTank && ControlledTank))
+    if (!(PlayerTank && ControlledTank))
     {
         return;
     }
-    if (!ensure(AimingComponent))
+    if (!AimingComponent)
     {
         return;
     }
